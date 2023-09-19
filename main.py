@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 import smtplib
 import os
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import requests
 from bs4 import BeautifulSoup
@@ -14,7 +14,7 @@ def make_reading_list():
     # returns a list of titles reading currently
 
     # open file
-    with open("list.txt", "r") as file:
+    with open("../list.txt", "r") as file:
         text = file.readlines()
 
     # go through file line by line and get list of titles
@@ -28,7 +28,7 @@ def get_new_titles(soup, reading_list):
     # gets the most recent titles and return titles that are in reading list today
 
     # step 1: look at titles and find ones that are released today
-    now = datetime.now()
+    now = datetime.now() - timedelta(days=1)
     today = now.strftime("%b %d \'%y")
     doujin_titles_today_lst = soup.find_all('small', string="released " + today)
 
@@ -68,7 +68,7 @@ def send_email(title):
     # automates sending emails with correct subject line
 
     # opens text file for info
-    with open("gmail.txt", "r") as file:
+    with open("../gmail.txt", "r") as file:
         text = file.readlines()
 
     # input data for email
@@ -103,6 +103,7 @@ def main():
     oh_yeah = get_new_titles(soup, reading_list)
    
     for title in oh_yeah:
+        print(title)
         send_email(title)
 
     print("\nI think it worked...?")

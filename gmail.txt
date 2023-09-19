@@ -1,4 +1,5 @@
-email of sender: 
-key: 
+email of sender: rualex2008@gmail.com
+key: cwsc ljix uedc uzvs
 
 recipients:
+rualex2008@gmail.com
