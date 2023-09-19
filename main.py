@@ -67,12 +67,18 @@ def convert_title(title):
 def send_email(title):
     # automates sending emails with correct subject line
 
+    # opens text file for info
+    with open("gmail.txt", "r") as file:
+        text = file.readlines()
+
     # input data for email
     subject = "New " + title + " chapter!"
     body = "It's gonna be a good night today :)"
-    sender = "rualex2008@gmail.com"
-    recipients = ["rualex2008@gmail.com"]
-    p = 'cwsc ljix uedc uzvs'
+    sender = text[0].strip()[17:]
+    recipients = []
+    p = text[1].strip()[5:]
+    for i in range(len(text)-4):
+        recipients.append(text[i+4].strip())
 
     # creates actual email and sends it
     msg = MIMEText(body)
@@ -97,7 +103,7 @@ def main():
     oh_yeah = get_new_titles(soup, reading_list)
    
     for title in oh_yeah:
-            send_email(title)
+        send_email(title)
 
     print("\nI think it worked...?")
     
