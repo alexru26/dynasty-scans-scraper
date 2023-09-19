@@ -7,8 +7,3 @@
 4. Add titles you want to keep track of in list.txt. Make sure to capitalize it like the website does and don't include the chapter number.
 5. Run main.exe in dist folder and it should send an email.
 6. If you want to run it on a regular basis, go search up a guide online on how to run exe's periodically.
-
-## Things to work on
-- setup github repo
-- mobile app?
-- ai that looks at tags and recommends titles
