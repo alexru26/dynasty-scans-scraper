@@ -28,23 +28,23 @@ def get_new_titles(soup, reading_list):
     # gets the most recent titles and return titles that are in reading list today
 
     # step 1: look at titles and find ones that are released today
-    now = datetime.now() - timedelta(days=1)
+    now = datetime.now()
     today = now.strftime("%b %d \'%y")
-    doujin_titles_today_lst = soup.find_all('small', string="released " + today)
+    titles_today_lst = soup.find_all('small', string="released " + today)
 
-    doujin_titles_today = []
-    for title in doujin_titles_today_lst:
+    titles_today = []
+    for title in titles_today_lst:
         a = title.find_previous_siblings()
-        doujin_titles_today.append(convert_title(a[1].text))
+        titles_today.append(convert_title(a[1].text))
 
     # step 2: look at reading list to find matches
-    good_doujin_titles_today = []
-    for title in doujin_titles_today:
+    good_titles_today = []
+    for title in titles_today:
         if(title.strip() in reading_list):
-            good_doujin_titles_today.append(title.strip())
+            good_titles_today.append(title.strip())
 
     # step 3: return list of matches
-    return good_doujin_titles_today
+    return good_titles_today
 
 def convert_title(title):
     # convert from ... ch__ to ...
