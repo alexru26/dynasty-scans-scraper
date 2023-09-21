@@ -1,0 +1,6 @@
+email of sender: ilovedynastyscans@gmail.com
+key: aaaa aaaa aaaa aaaa
+
+recipients:
+ihatedynastyscans@gmail.com
+thisisajokelmao@gmail.com

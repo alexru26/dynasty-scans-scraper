@@ -5,7 +5,7 @@ This code is meant to notify you of new titles released today that you are curre
 
 ## How to use
 1. Download repository.
-2. Change gmail.txt by adding your gmail, key, and recipients list.
+2. Change gmail.txt by adding your gmail, key, and recipients list. For recipients, make sure to list them in a separate line each. An example is provided in gmail_ex.txt.
 3. If you don't know your key, go to mygoogleaccount.com. Make sure you have 2-factor authentication enabled. At the top search "app passwords" and add an app password.
 4. Add titles you want to keep track of in list.txt. Make sure to capitalize it like the website does, include punctuation, and don't add chapter numbers.
 5. Run main.exe in and hopefully it works.

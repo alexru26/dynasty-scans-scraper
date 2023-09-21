@@ -14,7 +14,7 @@ def make_reading_list():
     # returns a list of titles reading currently
 
     # open file
-    with open("../list.txt", "r") as file:
+    with open("list.txt", "r") as file:
         text = file.readlines()
 
     # go through file line by line and get list of titles
@@ -29,13 +29,20 @@ def get_new_titles(soup, reading_list):
 
     # step 1: look at titles and find ones that are released today
     now = datetime.now()
-    today = now.strftime("%b %d \'%y")
-    titles_today_lst = soup.find_all('small', string="released " + today)
+    today = now.strftime("%B %d, %Y")
+    yesterday = (now - timedelta(days=1)).strftime("%B %d, %Y")
+    date = soup.find('dt', string=today)
 
     titles_today = []
-    for title in titles_today_lst:
-        a = title.find_previous_siblings()
-        titles_today.append(convert_title(a[1].text))
+    a = date.find_next_sibling()
+    while(True):
+        check = a
+        titles_today.append(convert_title(check.find('a').text))
+        a = a.find_next_sibling()
+        if(a.text == yesterday):
+            break
+
+    print(titles_today)
 
     # step 2: look at reading list to find matches
     good_titles_today = []
@@ -68,7 +75,7 @@ def send_email(title):
     # automates sending emails with correct subject line
 
     # opens text file for info
-    with open("../gmail.txt", "r") as file:
+    with open("gmail.txt", "r") as file:
         text = file.readlines()
 
     # input data for email
@@ -98,6 +105,8 @@ def main():
 
     # list of titles currently looking out for
     reading_list = make_reading_list()
+
+    print(reading_list)
 
     # returns title that released today and is in reading list
     oh_yeah = get_new_titles(soup, reading_list)
